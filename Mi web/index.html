@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Venta de Entradas - EventosPro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-bU3aThfA8i+VpXAZbHrfNUQ4r7r/jVPgBBOE6D2akV2cOSbpOc0W3sQLuQZCvm2nrcYPsd5X0r1SAb+1mOeZLw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loader" class="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <header>
+    <div id="usuarioActivoContainer">
+      <button id="modoOscuroBtn">🌙 Modo Oscuro</button>
+      <span id="bienvenidaUsuario"></span>
+      <button id="cerrarSesionBtn" style="display: none;">Cerrar sesión</button>
+    </div>
+  </header>
+   
+  <section class="hero">
+   <div class="hero-overlay">
+    <div class="hero-content">
+      <h2>¡Tus eventos favoritos en un solo lugar!</h2>
+      <p>Compra tus entradas fácil, rápido y seguro con EventosPro.</p>
+      <a href="#misEntradas" class="btn-hero">Ver Eventos</a>
+    </div>
+   </div>
+  </section>
+
+   <h1>🎟️ EventosPro</h1>
+  
+  <nav>
+    <div class="menu-toggle" id="menuToggle">&#9776;</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#misEntradas">Mis Entradas</a></li>
+      <li><a href="#registro">Registro</a></li>
+      <li><a href="#login">Iniciar Sesión</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="inicio" class="seccion">
+      <h2>Bienvenido a EventosPro</h2>
+      <p>Compra tus entradas para los mejores eventos en Perú.</p>
+    </section>
+
+    <section id="registro" class="seccion">
+      <h2>Registro de Usuario</h2>
+      <form id="registroForm">
+        <input type="text" id="nombre" placeholder="Nombre completo" required />
+        <input type="email" id="correo" placeholder="Correo electrónico" required />
+        <input type="password" id="clave" placeholder="Contraseña" required />
+        <button type="submit">Registrarse</button>
+      </form>
+      <p id="mensajeRegistro"></p>
+
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm">
+        <input type="email" id="loginCorreo" placeholder="Correo electrónico" required />
+        <input type="password" id="loginClave" placeholder="Contraseña" required />
+        <button type="submit">Ingresar</button>
+      </form>
+      <p id="mensajeLogin"></p>
+    </section>
+
+    <section id="eventos" class="seccion">
+      <h2>Eventos Disponibles</h2>
+      <input type="text" id="filtroEvento" placeholder="Buscar evento..." />
+
+      <!-- Tarjeta moderna con imagen -->
+      <div class="contenedor-eventos"> 
+        <div class="tarjeta-evento">
+          <img src="img/rock.png" alt="Concierto en vivo"/>
+          <div class="contenido">
+            <h3>Concierto de Rock</h3>
+            <p>📍 Lima - 30 de agosto</p>
+            <button class="comprarBtn">Comprar Entrada</button>
+        </div>
+      </div>
+
+      <div class="tarjeta-evento">
+        <img src="img/maraton.png" alt="Evento"/>
+        <div class="contenido">
+          <h3>Maratón Solidaria</h3>
+          <p>📍 Trujillo - 20 de septiembre</p>
+          <button class="comprarBtn">Comprar Entrada</button>
+        </div>
+      </div>
+
+      <div class="tarjeta-evento">
+       <img src="img/expoteng.png" alt="ExpoTecnología 2025"/>
+       <div class="contenido">
+         <h3>ExpoTecnología 2025</h3>
+         <p>📍 Arequipa - 5 de octubre</p>
+         <button class="comprarBtn">Comprar Entrada</button>
+       </div>
+      </div>
+
+      <div class="tarjeta-evento">
+        <img src="img/stand.png" alt="Noche de Stand Up"/>
+        <div class="contenido">
+          <h3>Noche de Stand Up</h3>
+          <p>📍 Lima - 28 de septiembre</p>
+          <button class="comprarBtn">Comprar Entrada</button>
+        </div>
+      </div>
+
+      <div class="tarjeta-evento">
+        <img src="img/reggaeton.png" alt="Noche de Reguetón"/>
+        <div class="contenido">
+          <h3>Noche de Reguetón</h3>
+          <p>📍 Piura - 30 de octubre</p>
+          <button class="comprarBtn">Comprar Entrada</button>
+         </div>
+      </div>
+
+      <!-- Tarjeta moderna con imagen -->
+      <div class="tarjeta-evento">
+        <img src="img/feria.png" alt="Concierto en vivo"/>
+        <div class="contenido">
+          <h3>Feria Gastronómica</h3>
+          <p>📍 Arequipa - 10 de septiembre</p>
+          <button class="comprarBtn">Comprar Entrada</button>
+        </div>
+      </div>
+
+      <div class="tarjeta-evento">
+        <img src="img/unicatro.png" alt="Concierto La Única Tropical"/>
+        <div class="contenido">
+           <h3>La Única Tropical en Vivo</h3>
+           <p>📍 Chiclayo - 12 de noviembre</p>
+           <button class="comprarBtn">Comprar Entrada</button>  
+        </div>
+      </div>
+
+      <div class="tarjeta-evento">
+        <img src="img/armonia.png" alt="Concierto Armonía 10"/>
+        <div class="contenido">
+           <h3>Armonía 10 - Gira Nacional</h3>
+           <p>📍 Trujillo - 18 de noviembre</p>
+           <button class="comprarBtn">Comprar Entrada</button>
+        </div>
+      </div>
+
+      <div class="tarjeta-evento">
+        <img src="img/ozuna.png" alt="Concierto Ozuna"/>
+        <div class="contenido">
+           <h3>Ozuna - Tour Mundial</h3>
+           <p>📍 Lima - 25 de noviembre</p>
+           <button class="comprarBtn">Comprar Entrada</button>
+        </div>
+      </div>
+
+      <div class="tarjeta-evento">
+        <img src="img/festival.png" alt="Concierto en vivo"/>
+        <div class="contenido">
+          <h3>Festival Cultural</h3>
+          <p>📍 Cusco - 15 de octubre</p>
+          <button class="comprarBtn">Comprar Entrada</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="misEntradas" class="seccion">
+      <h2>Mis Entradas</h2>
+      <div id="listaEntradas"></div>
+    </section>
+
+    <section id="nosotros" class="seccion">
+      <h2>Sobre Nosotros</h2>
+      <p>EventosPro es tu plataforma confiable para comprar entradas a los mejores eventos del país. ¡Únete a nuestra comunidad y no te pierdas nada!</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 EventosPro - Todos los derechos reservados</p>
+    <div class="redes-sociales-img">
+      <a href="https://www.tiktok.com/" target="_blank" title="TikTok">
+        <img src="img/tiktok.png" alt="TikTok">
+      </a>
+      <a href="https://www.facebook.com/" target="_blank" title="Facebook">
+        <img src="img/Facebook.png" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+        <img src="img/instagram.png" alt="Instagram">
+      </a>
+      <a href="https://t.me/" target="_blank" title="Telegram">
+        <img src="img/telegram.png" alt="Telegram">
+      </a>
+      <a href="https://www.whatsapp.com/" target="_blank" title="WhatsApp">
+        <img src="img/whatsapp.png" alt="WhatsApp">
+      </a>
+    </div>
+  </footer>
+
+  <!-- Modal de confirmación -->
+  <div id="modalConfirmacion" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar" id="cerrarModal">&times;</span>
+      <h2>✅ ¡Entrada comprada con éxito!</h2>
+      <p id="mensajeConfirmacion"></p>
+    </div>
+  </div>
+
+  <!-- Botón Volver arriba -->
+  <button id="btnVolverArriba" title="Volver arriba">↑</button>
+
+  <script>
+    const btnVolverArriba = document.getElementById("btnVolverArriba");
+
+    window.onscroll = () => {
+      if (document.documentElement.scrollTop > 300) {
+        btnVolverArriba.style.display = "block";
+      } else {
+        btnVolverArriba.style.display = "none";
+      }
+    };
+
+    btnVolverArriba.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

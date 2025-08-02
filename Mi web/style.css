@@ -1,0 +1,787 @@
+/* Estilos generales */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #222;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- Ajustes de Tipografía Responsiva --- */
+html {
+  font-size: 16px; /* Establece un tamaño base para rem */
+}
+
+h1 {
+  /* Tamaño de fuente que se adapta: mínimo 2em (32px), preferido 5vw (5% del ancho del viewport), máximo 3.5em (56px) */
+  font-size: clamp(2em, 5vw, 3.5em);
+  text-align: center;
+  color: #003366;
+  margin-top: 1em; /* Añade margen superior para que no se pegue al header */
+}
+
+h2 {
+  /* Tamaño de fuente que se adapta: mínimo 1.5em (24px), preferido 4vw, máximo 2.5em (40px) */
+  font-size: clamp(1.5em, 4vw, 2.5em);
+  color: #003366;
+  margin-top: 0;
+}
+
+header, footer {
+  background-color: #003366;
+  color: white;
+  text-align: center;
+  padding: 1em 0;
+}
+
+/* Navegación */
+nav {
+  background-color: #0055a5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1em;
+  flex-wrap: wrap;
+}
+
+nav .logo {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.nav-links li a,
+.nav-links li button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.nav-links li button:hover,
+.nav-links li a:hover {
+  text-decoration: underline;
+}
+
+/* Menú responsive */
+.menu-toggle {
+  display: none;
+  font-size: 1.5em;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #0055a5;
+  }
+
+  .nav-links.activo {
+    display: flex;
+  }
+}
+
+/* Secciones */
+/* --- Padding del Contenido Principal --- */
+main {
+  padding: 1em 5%; /* 1em de padding vertical, 5% de padding horizontal */
+  max-width: 1400px; /* Opcional: limita el ancho máximo del contenido principal para pantallas muy grandes */
+  margin: 0 auto; /* Centra el contenido principal */
+}
+
+.seccion {
+  margin-bottom: 2em;
+  padding: 1em; /* Considera un padding responsive si el contenido se ve apretado en móviles muy pequeños */
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Formularios */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  max-width: 400px;
+  margin: auto;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 0.6em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 0.7em;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0055a5;
+}
+
+#filtroEvento {
+  max-width: 500px; /* Limita el ancho del input */
+  margin: 0.5em auto 2em auto; /* Centra el input y da más espacio */
+  display: block; /* Asegura que 'margin: auto' funcione para centrar */
+  padding: 0.8em; /* Un poco más de padding */
+  font-size: 1.1em; /* Texto un poco más grande */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Modal */
+.modal {
+  display: flex; /* Cambiado a flex */
+  align-items: center; /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Para cuando el contenido del modal sea muy largo */
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-contenido {
+  background-color: white;
+  margin: 0; /* Quitamos el margin para que el flexbox haga el centrado */
+  padding: 2em;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  animation: aparecer 0.3s ease-in-out;
+  /* Opcional: añade un max-height y overflow para contenido muy largo en móviles */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes aparecer {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+/* Lista de entradas */
+#listaEntradas .entradaItem {
+  background-color: #f0f8ff;
+  border: 1px dashed #007acc;
+  margin: 0.5em 0;
+  padding: 0.5em;
+  border-radius: 4px;
+}
+
+/* Modo oscuro */
+body.modo-oscuro {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.modo-oscuro header,
+body.modo-oscuro footer {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+body.modo-oscuro .seccion {
+  background-color: #1c1c1c;
+}
+
+body.modo-oscuro input,
+body.modo-oscuro button,
+body.modo-oscuro #filtroEvento {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+body.modo-oscuro .evento {
+  background-color: #2a2a2a;
+}
+
+body.modo-oscuro .entradaItem {
+  background-color: #2e2e2e;
+  border-color: #666;
+}
+
+body.modo-oscuro .modal-contenido {
+  background-color: #292929;
+  color: white;
+}
+
+/* Loader */
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db; /* Pequeño typo aquí, debería ser 6px */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Botón volver arriba */
+#btnVolverArriba {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#btnVolverArriba:hover {
+  background-color: #2980b9;
+  transform: scale(1.1);
+}
+
+/* ========== Contenedor General de Eventos ========== */
+.contenedor-eventos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  place-items: center;/* NUEVO: centra contenido en ambas direcciones */
+ 
+}
+
+/* ========== Tarjeta de Evento ========== */
+.tarjeta-evento {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Animación al pasar el mouse */
+.tarjeta-evento:hover {
+  transform: scale(1.03);
+}
+
+/* Imagen del evento */
+.tarjeta-evento img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block; /* Asegura que la imagen se comporte como un bloque para centrado de bloque si fuera necesario */
+  margin: 0 auto; /* Centra la imagen horizontalmente dentro de su contenedor si width es menor al 100% */
+}
+
+/* Contenido textual */
+.tarjeta-evento .contenido {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: center; /* <--- Añade esto para centrar el texto */
+  align-items: center; /* <--- Y esto para centrar los elementos flex */
+}
+
+/* Título del evento */
+.tarjeta-evento h3 {
+  font-size: clamp(1rem, 3.5vw, 1.3em); /* Escala el título de las tarjetas */
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Descripción o lugar y fecha */
+.tarjeta-evento p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Botón de compra */
+.tarjeta-evento button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: auto;
+}
+
+.tarjeta-evento button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Confirmación */
+.confirmacion-container {
+  min-height: 100vh;
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom right, #f0f9ff, #d6f0f3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmacion-container h1 {
+  font-size: 2.5rem;
+  color: #28a745;
+  margin-bottom: 20px;
+}
+
+.confirmacion-container p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.btn-volver {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.btn-volver:hover {
+  background-color: #0056b3;
+}
+
+.comprarBtn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 18px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.comprarBtn:hover {
+  background-color: #e64a19;
+  transform: scale(1.05);
+}
+body.modo-oscuro .comprarBtn {
+  background-color: #ff7043;
+  color: white;
+}
+
+body.modo-oscuro .comprarBtn:hover {
+  background-color: #ff5722;
+}
+
+.redes-sociales {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social {
+  font-size: 1.5em;
+  color: white;
+  background-color: #444;
+  padding: 12px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.social:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.facebook { background-color: #3b5998; }
+.instagram { background-color: #e4405f; }
+.tiktok { background-color: #000000; }
+.telegram { background-color: #0088cc; }
+
+.redes-sociales-img {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.redes-sociales-img img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.redes-sociales-img img:hover {
+  transform: scale(1.2) rotate(10deg);
+  filter: brightness(1.2);
+}
+
+/* Sección Hero con imagen de fondo */
+.hero {
+  background-image: url('img/hero.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; /* ¡IMPORTANTE: CAMBIADO A 'COVER' para que la imagen cubra todo! */
+  background-color: black; /* Esto solo se verá si la imagen no carga o no cubre */
+  height: 90vh;
+  position: relative; /* Asegura que la superposición esté bien posicionada */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Color de texto predeterminado para el hero */
+  text-align: center; /* Centra el texto directamente en el hero si no hay hero-content */
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* oscurecer un poco para mayor contraste */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.hero-content {
+  text-align: center; /* Centra el texto dentro del propio contenedor de contenido */
+  padding: 2rem;
+  max-width: 800px;
+}
+
+/* Para mejorar el contraste del título en la imagen de fondo */
+.hero h2 {
+  font-size: clamp(1.8rem, 7vw, 3rem); /* Mínimo 1.8rem, escala hasta 7vw, máximo 3rem */
+  margin-bottom: 1rem;
+  color: white; /* CAMBIADO A BLANCO para que se vea mejor sobre cualquier imagen oscura */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Opcional: añade sombra al texto para mayor legibilidad */
+}
+
+.hero p {
+  font-size: clamp(1rem, 3vw, 1.2rem); /* Ajuste responsive para el párrafo */
+  margin-bottom: 2rem;
+}
+
+.btn-hero {
+  background-color: #ffcc00;
+  color: #000;
+  padding: 0.8rem 1.6rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 30px;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.btn-hero:hover {
+  background-color: #ffaa00;
+}
+
+
+/* --- ESTILOS PARA "MIS ENTRADAS" --- */
+
+/* Centrar el título "Mis Entradas" */
+#misEntradas h2 { /* Usamos el ID de la sección directamente */
+  text-align: center;
+  margin-bottom: 1.5em; /* Añade un poco más de espacio debajo del título */
+  font-size: clamp(1.5em, 4vw, 2.5em); /* Reutiliza el clamp de h2 */
+}
+
+/* Contenedor de las entradas para centrar y espaciar */
+#listaEntradas {
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: center; /* Centra horizontalmente los 'entradaItem' */
+  gap: 1em; /* Espacio entre cada 'entradaItem' */
+  max-width: 800px; /* Limita el ancho del contenedor para que no se extienda demasiado */
+  margin: 0 auto; /* Centra el contenedor completo en la página */
+  padding: 1em; /* Añade un poco de padding interno */
+}
+
+/* Estilos mejorados para cada entrada individual */
+#listaEntradas .entradaItem {
+  background-color: #f0f8ff; /* Color de fondo existente */
+  border: 1px solid #007acc; /* Cambiado a solid para una línea más definida */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil */
+  margin: 0; /* Quita el margin anterior para que 'gap' funcione mejor */
+  padding: 1em 1.5em; /* Aumenta un poco el padding interno */
+  border-radius: 8px; /* Un poco más de redondeo */
+  width: 100%; /* Ocupa el 100% del ancho de su contenedor (#listaEntradas) */
+  box-sizing: border-box; /* Asegura que padding y border se incluyan en el width */
+  text-align: left; /* Alinea el texto a la izquierda dentro de cada entrada */
+}
+
+/* Asegurar que el texto dentro de entradaItem no se vea afectado por text-align: center si se aplicó a un padre */
+#listaEntradas .entradaItem h3,
+#listaEntradas .entradaItem p {
+  text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+  margin-bottom: 0.5em; /* Espacio entre los párrafos dentro de la entrada */
+  font-size: clamp(0.9em, 2.5vw, 1.1em); /* Hace el texto más responsive */
+}
+
+#listaEntradas .entradaItem p:last-child {
+  margin-bottom: 0; /* Quita el margen inferior del último párrafo */
+}
+
+/* --- ESTILOS ADICIONALES PARA LA SECCIÓN DE EVENTOS --- */
+
+/* Centrar el título "Eventos Disponibles" */
+#eventos h2 {
+  text-align: center;
+  margin-bottom: 1.5em; /* Añade espacio debajo del título */
+  font-size: clamp(1.5em, 4vw, 2.5em); /* Reutiliza el clamp de h2 */
+}
+
+/* Centrar y mejorar el input de filtro */
+#filtroEvento {
+  max-width: 500px; /* Limita el ancho del input */
+  margin: 0.5em auto 2em auto; /* Centra el input y da más espacio */
+  display: block; /* Asegura que 'margin: auto' funcione para centrar */
+  padding: 0.8em; /* Un poco más de padding */
+  font-size: 1.1em; /* Texto un poco más grande */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+/* Ajustes para modo oscuro */
+body.modo-oscuro #misEntradas h2,
+body.modo-oscuro #eventos h2 {
+    color: #f0f0f0; /* Color del título en modo oscuro */
+}
+
+body.modo-oscuro #filtroEvento {
+    background-color: #333; /* Fondo del input en modo oscuro */
+    color: #fff; /* Texto del input en modo oscuro */
+    border-color: #555; /* Borde del input en modo oscuro */
+}
+
+/* Ajustes para modo oscuro en los botones */
+body.modo-oscuro .btn-hero {
+    background-color: #ffa500; /* Un color diferente para el botón hero en modo oscuro si lo deseas */
+    color: #fff;
+}
+body.modo-oscuro .btn-hero:hover {
+    background-color: #cc8400;
+}
+
+
+/* --- Media Query para Dispositivos Muy Pequeños (ej. iPhone 5/SE antiguo, etc.) --- */
+@media (max-width: 480px) {
+  /* Reduce el padding general de las secciones si se ve muy grande */
+  .seccion {
+    padding: 0.8em;
+  }
+
+  /* Ajusta el padding del hero si el texto se ve muy apretado */
+  .hero-content {
+    padding: 1rem;
+  }
+
+  /* Ajustes para las tarjetas de evento si minmax(280px) es demasiado grande */
+  .contenedor-eventos {
+    grid-template-columns: 1fr; /* Una sola columna para móviles muy estrechos */
+    gap: 15px; /* Reduce el espacio entre ellas */
+    padding: 10px; /* Reduce el padding del contenedor de eventos */
+  }
+
+  /* Ajusta el tamaño de la imagen del hero si es necesario */
+  .hero {
+    height: 60vh; /* Puedes reducir un poco la altura en móviles para que más contenido sea visible sin scroll */
+  }
+
+  /* Botones como "Comprar Entrada" */
+  .comprarBtn, .btn-hero {
+    padding: 0.7em 1.2em; /* Un poco menos de padding */
+    font-size: 0.9em; /* Un poco más pequeña la fuente del botón */
+  }
+
+  /* Ajuste para el spinner si el borde es muy grande */
+  .spinner {
+    border-top: 6px solid #3498db; /* Corregido el typo */
+  }
+}
+
+/* --- Estilos para los Formularios --- */
+
+/* Contenedor principal de la sección de registro/login */
+#registro {
+  text-align: center; /* Centra los títulos h2 y los formularios */
+}
+
+#registro h2 {
+  margin-bottom: 1.5em; /* Espacio debajo de cada título de formulario */
+  text-align: center; /* Asegura que los títulos estén centrados */
+}
+
+/* Estilos generales para ambos formularios */
+#registroForm,
+#loginForm {
+  background-color: #f8f8f8; /* Un fondo ligeramente diferente para los formularios */
+  padding: 2em; /* Más padding interno */
+  border-radius: 10px; /* Bordes más redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+  margin: 2em auto; /* Centra el formulario horizontalmente y añade margen vertical */
+  max-width: 450px; /* Limita el ancho máximo del formulario */
+  display: flex; /* Asegura que los elementos hijos se manejen con flexbox */
+  flex-direction: column; /* Apila los elementos verticalmente */
+  gap: 1.2em; /* Espacio entre los elementos del formulario */
+  box-sizing: border-box; /* Incluye padding y border en el width/height */
+}
+
+/* Estilos para los campos de entrada de texto */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%; /* Ocupa todo el ancho disponible dentro del formulario */
+  padding: 0.8em 1em; /* Más padding para una mejor entrada táctil */
+  border: 1px solid #dcdcdc; /* Borde más suave */
+  border-radius: 8px; /* Bordes más redondeados */
+  font-size: 1.1em; /* Fuente ligeramente más grande */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #007bff; /* Borde azul al enfocar */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Sombra suave al enfocar */
+  outline: none; /* Elimina el contorno predeterminado del navegador */
+}
+
+/* Estilos para los botones de formulario (Registrarse / Ingresar) */
+#registroForm button,
+#loginForm button {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 1em 1.5em; /* Más padding para el botón */
+  font-size: 1.15em; /* Fuente más grande */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #007bff; /* Color azul primario */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 1em; /* Espacio superior para separar del último input */
+}
+
+#registroForm button:hover,
+#loginForm button:hover {
+  background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+  transform: translateY(-2px); /* Pequeño efecto de elevación */
+}
+
+/* Mensajes de registro/login */
+#mensajeRegistro,
+#mensajeLogin {
+  margin-top: 1em;
+  font-size: 1em;
+  color: #333; /* Color de texto predeterminado */
+  font-weight: bold;
+  text-align: center; /* Asegura que el mensaje esté centrado */
+}
+
+/* Estilos para Modo Oscuro */
+body.modo-oscuro #registroForm,
+body.modo-oscuro #loginForm {
+  background-color: #2a2a2a; /* Fondo más oscuro en modo oscuro */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.modo-oscuro input[type="text"],
+body.modo-oscuro input[type="email"],
+body.modo-oscuro input[type="password"] {
+  background-color: #3e3e3e; /* Fondo de input más oscuro */
+  border-color: #555;
+  color: #f0f0f0; /* Color de texto claro */
+}
+
+body.modo-oscuro input[type="text"]:focus,
+body.modo-oscuro input[type="email"]:focus,
+body.modo-oscuro input[type="password"]:focus {
+  border-color: #66b3ff; /* Borde azul claro al enfocar */
+  box-shadow: 0 0 8px rgba(102, 179, 255, 0.3);
+}
+
+body.modo-oscuro #registroForm button,
+body.modo-oscuro #loginForm button {
+  background-color: #0096ff; /* Botón más brillante en modo oscuro */
+}
+
+body.modo-oscuro #registroForm button:hover,
+body.modo-oscuro #loginForm button:hover {
+  background-color: #007bff; /* Hover más oscuro */
+}
+
+body.modo-oscuro #mensajeRegistro,
+body.modo-oscuro #mensajeLogin {
+  color: #f0f0f0; /* Color de texto claro para mensajes */
+}
